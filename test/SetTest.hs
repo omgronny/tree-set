@@ -1,6 +1,6 @@
 import Test.HUnit ( assertEqual, runTestTTAndExit, Test(..) )
 
-import Set(Tree, Leaf, insert, contains, delete)
+import Set(Tree, insert, contains, delete, listToSet)
 
 main :: IO ()
 main = runTestTTAndExit tests
@@ -10,7 +10,7 @@ tests = TestList [TestLabel "test1" test1]
 
 test1 :: Test
 test1 = TestCase ( do
-    let tree = foldr insert Leaf [3,1,4,1,5,9,2,6,5,3,5]
+    let tree = listToSet [3,1,4,1,5,9,2,6,5,3,5]
     assertEqual "Test assert" (Set.contains tree 3) True
     assertEqual "Test assert" (Set.contains tree 5) True
     assertEqual "Test assert" (Set.contains tree 8) False

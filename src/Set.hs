@@ -1,5 +1,5 @@
 {-# OPTIONS_GHC -Wunused-top-binds -Wincomplete-patterns -Wtype-defaults #-}
-module Set(Tree, Leaf, insert, contains, delete) where
+module Set(Tree, insert, contains, delete, listToSet) where
 
 data Tree a = Leaf | Node a (Tree a) (Tree a)
 
