@@ -1,3 +1,5 @@
+import Test.HUnit ( assertEqual, runTestTTAndExit, Test(..) )
+
 import Set(Tree, insert, contains, delete)
 
 main :: IO ()
