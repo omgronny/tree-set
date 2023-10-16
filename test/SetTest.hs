@@ -1,4 +1,4 @@
-import Set(Tree, insert, contains)
+import Set(Tree, insert, contains, delete)
 
 main :: IO ()
 main = runTestTTAndExit tests
