@@ -10,15 +10,15 @@ tests = TestList [TestLabel "test1" test1]
 
 test1 :: Test
 test1 = TestCase ( do
-    let tree = listToSet [3,1,4,1,5,9,2,6,5,3,5]
-    assertEqual "Test assert" (Set.contains tree 3) True
-    assertEqual "Test assert" (Set.contains tree 5) True
-    assertEqual "Test assert" (Set.contains tree 8) False
+    let tree = listToSet [3 :: Int,1,4,1,5,9,2,6,5,3,5]
+    assertEqual "Test assert" (Set.contains (3 :: Int) tree) True
+    assertEqual "Test assert" (Set.contains (5 :: Int) tree) True
+    assertEqual "Test assert" (Set.contains (8 :: Int) tree) False
 
-    let insertedTree = Set.insert 8 tree
-    assertEqual "Test assert" (Set.contains insertedTree 8) True
-    assertEqual "Test assert" (Set.contains tree 8) False
+    let insertedTree = Set.insert (8 :: Int) tree
+    assertEqual "Test assert" (Set.contains (8 :: Int) insertedTree) True
+    assertEqual "Test assert" (Set.contains (8 :: In)t tree) False
 
-    let deletedTree = Set.delete 3 tree
-    assertEqual "Test assert" (Set.contains deletedTree 3) False
-    assertEqual "Test assert" (Set.contains tree 3) True)
+    let deletedTree = Set.delete 3 :: Int tree
+    assertEqual "Test assert" (Set.contains (3 :: Int) deletedTree) False
+    assertEqual "Test assert" (Set.contains (3 :: Int) tree) True)

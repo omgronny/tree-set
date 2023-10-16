@@ -61,5 +61,5 @@ treeToList (Node x left right) = treeToList left ++ [x] ++ treeToList right
 
 main :: IO ()
 main = do
-    let tree = foldr insert Leaf [3,1,4,1,5,9,2,6,5,3,5]
-    print $ contains 3 tree
+    let tree = foldr insert Leaf [3 :: Int,1,4,1,5,9,2,6,5,3,5]
+    print $ contains (3 :: Int) tree
