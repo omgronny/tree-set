@@ -1,6 +1,6 @@
 import Test.HUnit ( assertEqual, runTestTTAndExit, Test(..) )
 
-import Set(Tree, insert, contains, delete)
+import Set(Tree, Leaf, insert, contains, delete)
 
 main :: IO ()
 main = runTestTTAndExit tests
