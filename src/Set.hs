@@ -95,6 +95,6 @@ sizeSet tree = length (setToList tree)
 
 main :: IO ()
 main = do
-    let tree = listToSet [3 :: Int,1,4,1,5,9,2,6,5,3,5]
-    let filteredZero = filterSet (> 4) tree
-    print $ setToList filteredZero
+    let tree1 = listToSet [3 :: Int,1,4,1,5,9,2,6,5,3,5]
+    let tree2 = listToSet [3 :: Int,1,10,15,-4,-6]
+    print $ setToList (mergeSets tree1 tree2)
