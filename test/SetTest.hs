@@ -6,7 +6,8 @@ main :: IO ()
 main = runTestTTAndExit tests
 
 tests :: Test
-tests = TestList [TestLabel "test1" test1]
+tests = TestList [TestLabel "test1" test1,
+                    TestLabel "test2" test2]
 
 test1 :: Test
 test1 = TestCase ( do
@@ -27,7 +28,6 @@ test1 = TestCase ( do
     assertEqual "Test assert" (Set.contains (3 :: Int) deletedTree) False
     assertEqual "Test assert" (Set.sizeSet tree) 7 :: Int
     assertEqual "Test assert" (Set.contains (3 :: Int) tree) True)
-
 
 test2 :: Test
 test2 = TestCase ( do
