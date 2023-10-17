@@ -26,11 +26,15 @@ deleteRoot :: Ord a => Tree a -> Tree a
 deleteRoot Leaf = Leaf
 deleteRoot (Node _ left Leaf) = left
 deleteRoot (Node _ Leaf right) = right
-deleteRoot (Node _ left right) = Node (findMinElement right) left right
+deleteRoot (Node _ left right) = Node (findMinElement right) (extractMinElement left) right
 
 findMinElement :: Ord a => Tree a -> a
 findMinElement (Node y Leaf _) = y
 findMinElement (Node _ left _) = findMinElement left
+
+extractMinElement :: Ord a => Tree a -> Tree a
+extractMinElement (Node x Leaf right) = right
+extractMinElement (Node x left right) = (Node x (extractMinElement left) right)
 
 --------------------------------------------------------------------------------
 
@@ -95,6 +99,6 @@ sizeSet tree = length (setToList tree)
 
 main :: IO ()
 main = do
-    let tree1 = listToSet [3 :: Int,1,4,1,5,9,2,6,5,3,5]
-    let tree2 = listToSet [3 :: Int,1,10,15,-4,-6]
-    print $ setToList (mergeSets tree1 tree2)
+    let tree = listToSet [3 :: Int,1,4,1,5,9,2,6,5,3,5]
+    let deletedTree = Set.delete (3 :: Int) tree
+    print $ sizeSet deletedTree
