@@ -1,5 +1,5 @@
 {-# OPTIONS_GHC -Wunused-top-binds -Wincomplete-patterns -Wtype-defaults #-}
-module Set(Tree, insert, contains, delete, listToSet) where
+module Set(Tree, insert, contains, delete, listToSet, mapSet, filterSet, foldlSet, foldrSet, mergeSets, sizeSet) where
 
 data Tree a = Leaf | Node a (Tree a) (Tree a)
 
@@ -53,13 +53,48 @@ listToSet list = foldr insert Leaf list
 inc :: Num a => a -> a
 inc x = x + 1
 
-treeToList :: Ord a => Tree a -> [a]
-treeToList Leaf = []
-treeToList (Node x left right) = treeToList left ++ [x] ++ treeToList right
+setToList :: Ord a => Tree a -> [a]
+setToList Leaf = []
+setToList (Node x left right) = setToList left ++ [x] ++ setToList right
+
+--------------------------------------------------------------------------------
+
+mapSet :: Ord a => Tree a -> (a -> a) -> Tree a
+mapSet tree fun = listToSet (mapSetToList tree fun)
+
+filterSet :: Ord a => (a -> Bool) -> Tree a -> Tree a
+filterSet predicate tree = listToSet (filter predicate (setToList tree))
+
+--------------------------------------------------------------------------------
+
+foldrSet :: Ord a => (a -> a1 -> a1) -> a1 -> Tree a -> a1
+foldrSet foldFun begin tree = foldr foldFun begin (setToList tree)
+
+foldlSet :: Ord a => (a1 -> a -> a1) -> a1 -> Tree a -> a1
+foldlSet foldFun begin tree = foldl foldFun begin (setToList tree)
+
+--------------------------------------------------------------------------------
+
+mergeSets :: Ord a => Tree a -> Tree a -> Tree a
+mergeSets Leaf rhs = rhs
+mergeSets lhs Leaf = lhs
+mergeSets lhs rhs = insertList lhs (setToList rhs)
+
+insertList :: Ord a => Tree a -> [a] -> Tree a
+insertList Leaf list = listToSet list
+insertList tree [] = tree
+insertList tree (h:t) = insertList (insert h tree) t
+
+--------------------------------------------------------------------------------
+
+sizeSet :: Ord a => Tree a -> Int
+sizeSet Leaf = 0
+sizeSet tree = length (setToList tree)
 
 --------------------------------------------------------------------------------
 
 main :: IO ()
 main = do
-    let tree = foldr insert Leaf [3 :: Int,1,4,1,5,9,2,6,5,3,5]
-    print $ contains (3 :: Int) tree
+    let tree = listToSet [3 :: Int,1,4,1,5,9,2,6,5,3,5]
+    let filteredZero = filterSet (> 4) tree
+    print $ setToList filteredZero
