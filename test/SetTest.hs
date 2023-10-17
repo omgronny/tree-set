@@ -21,7 +21,7 @@ test1 = TestCase ( do
     let insertedTree = Set.insert (8 :: Int) tree
     assertEqual "Test assert" (Set.sizeSet insertedTree) 8
     assertEqual "Test assert" (Set.contains (8 :: Int) insertedTree) True
-    assertEqual "Test assert" (Set.sizeSet tree) 7 :: Int
+    assertEqual "Test assert" (Set.sizeSet tree) 7
     assertEqual "Test assert" (Set.contains (8 :: Int) tree) False
 
     let deletedTree = Set.delete (3 :: Int) tree
