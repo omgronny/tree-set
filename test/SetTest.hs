@@ -44,4 +44,4 @@ test3 :: Test
 test3 = TestCase ( do
     let tree1 = listToSet [3 :: Int,1,4,1,5,9,2,6,5,3,5]
     let tree2 = listToSet [3 :: Int,1,10,15,-4,-6]
-    assertEqual "Test assert" (Set.sizeSet (Set.mergeSets tree1 tree2)) (Set.sizeSet tree1 + Set.sizeSet tree2))
+    assertEqual "Test assert" (Set.sizeSet (Set.mergeSets tree1 tree2)) 11)
