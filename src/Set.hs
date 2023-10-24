@@ -1,4 +1,3 @@
--- {-# OPTIONS_GHC -Wunused-top-binds -Wincomplete-patterns -Wtype-defaults #-}
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 module Set(Tree, insert, contains, delete, listToSet, mapSet, filterSet, foldlSet, foldrSet, mergeSets, sizeSet) where
 
