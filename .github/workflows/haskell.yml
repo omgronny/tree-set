@@ -44,10 +44,10 @@ jobs:
       run: |
         cabal build --enable-tests --enable-benchmarks all
         cabal install hlint
-        cabal install haskell-formatter
+        cabal install ormolu
     - name: Lint
       run: hlint . --report
     - name: Format
-      run: cd src && find . -name '*.hs' -type f -print0 | xargs -0 -n 1 bash -c 'haskell-formatter < "$@" | diff -u "$@" -' --
+      run: ormolu --mode check src
     - name: Run tests
-      run: cd .. && cabal test all
+      run: cabal test all
