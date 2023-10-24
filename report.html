@@ -161,12 +161,12 @@ document.body.className = "script";
 
 <p><a class="all" href="javascript:show('')">All hints</a></p>
 <ul>
-<li><a id="hint0" href="javascript:show('hint0')">Warning: Eta reduce (1)</a></li>
+<li>No hints</li>
 </ul>
 
 <p><a class="all" href="javascript:show('')">All files</a></p>
 <ul>
-<li><a id="file0" href="javascript:show('file0')">./src/Set.hs (1)</a></li>
+<li>No files</li>
 </ul>
 
 </div>
@@ -177,15 +177,7 @@ v2.1.17
     - a tool to suggest improvements to your Haskell code.
 </p>
 
-<div class="hint0 file0">
-./src/Set.hs:56:1: Warning: Eta reduce<br/>
-Found<br/>
-<pre><span class='hs-definition'>listToSet</span> <span class='hs-varid'>list</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>foldr</span> <span class='hs-varid'>insert</span> <span class='hs-conid'>Leaf</span> <span class='hs-varid'>list</span></pre>
-Perhaps<br/>
-<pre><span class='hs-definition'>listToSet</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>foldr</span> <span class='hs-varid'>insert</span> <span class='hs-conid'>Leaf</span></pre>
-
-</div>
-
+No hints
 </div>
 <script type='text/javascript'>
 show(window.location.hash.slice(1), true);
