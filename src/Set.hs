@@ -1,4 +1,5 @@
-{-# OPTIONS_GHC -Wunused-top-binds -Wincomplete-patterns -Wtype-defaults #-}
+-- {-# OPTIONS_GHC -Wunused-top-binds -Wincomplete-patterns -Wtype-defaults #-}
+{-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 module Set(Tree, insert, contains, delete, listToSet, mapSet, filterSet, foldlSet, foldrSet, mergeSets, sizeSet) where
 
 data Tree a = Leaf | Node a (Tree a) (Tree a)
@@ -33,8 +34,8 @@ findMinElement (Node y Leaf _) = y
 findMinElement (Node _ left _) = findMinElement left
 
 extractMinElement :: Ord a => Tree a -> Tree a
-extractMinElement (Node x Leaf right) = right
-extractMinElement (Node x left right) = (Node x (extractMinElement left) right)
+extractMinElement (Node _ Leaf right) = right
+extractMinElement (Node x left right) = Node x (extractMinElement left) right
 
 --------------------------------------------------------------------------------
 
@@ -52,10 +53,7 @@ mapSetToList Leaf _ = []
 mapSetToList (Node x left right) fun = mapSetToList left fun ++ [fun x] ++ mapSetToList right fun
 
 listToSet :: Ord a => [a] -> Tree a
-listToSet list = foldr insert Leaf list
-
-inc :: Num a => a -> a
-inc x = x + 1
+listToSet = foldr insert Leaf
 
 setToList :: Ord a => Tree a -> [a]
 setToList Leaf = []

@@ -1,9 +1,10 @@
-import Test.HUnit ( assertEqual, runTestTTAndExit, Test(..) )
+import Test.HUnit(assertEqual, runTestTT, Test(..))
+import qualified Test.HUnit.Base
 
-import Set(Tree, insert, contains, delete, listToSet, mapSet, filterSet, foldlSet, foldrSet, mergeSets, sizeSet)
+import Set(insert, contains, delete, listToSet, filterSet, mergeSets, sizeSet)
 
-main :: IO ()
-main = runTestTTAndExit tests
+main :: IO Test.HUnit.Base.Counts
+main = runTestTT tests
 
 tests :: Test
 tests = TestList [TestLabel "test1" test1,
