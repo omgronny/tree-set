@@ -85,19 +85,10 @@ mergeSets lhs rhs = insertList lhs (setToList rhs)
 insertList :: (Ord a) => Tree a -> [a] -> Tree a
 insertList Leaf list = listToSet list
 insertList tree [] = tree
-insertList tree (h:t) = insertList (insert h tree) t
+insertList tree (h : t) = insertList (insert h tree) t
 
 --------------------------------------------------------------------------------
 
 sizeSet :: (Ord a) => Tree a -> Int
 sizeSet Leaf = 0
 sizeSet tree = length (setToList tree)
-
---------------------------------------------------------------------------------
-
-main :: IO ()
-main = do
-    let tree = listToSet [3 :: Int,1,4,1,5,9,2,6,5,3,5]
-    let deletedTree = Set.delete (3 :: Int) tree
-    print $ sizeSet deletedTree
-    print $ deletedTree
