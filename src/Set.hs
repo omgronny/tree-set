@@ -48,9 +48,9 @@ contains x (Node y left right)
 
 --------------------------------------------------------------------------------
 
-mapSetToList :: (Ord a) => Tree a -> (a -> a) -> [a]
-mapSetToList Leaf _ = []
-mapSetToList (Node x left right) fun = mapSetToList left fun ++ [fun x] ++ mapSetToList right fun
+mapSetToList :: (Ord a) => (a -> a) -> Tree a -> [a]
+mapSetToList _ Leaf = []
+mapSetToList fun (Node x left right) = mapSetToList fun left ++ [fun x] ++ mapSetToList fun right
 
 listToSet :: (Ord a) => [a] -> Tree a
 listToSet = foldr insert Leaf
@@ -61,8 +61,8 @@ setToList (Node x left right) = setToList left ++ [x] ++ setToList right
 
 --------------------------------------------------------------------------------
 
-mapSet :: (Ord a) => Tree a -> (a -> a) -> Tree a
-mapSet tree fun = listToSet (mapSetToList tree fun)
+mapSet :: (Ord a) => (a -> a) -> Tree a -> Tree a
+mapSet fun tree = listToSet (mapSetToList fun tree)
 
 filterSet :: (Ord a) => (a -> Bool) -> Tree a -> Tree a
 filterSet predicate tree = listToSet (filter predicate (setToList tree))
