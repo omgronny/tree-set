@@ -1,10 +1,10 @@
-import Test.HUnit(assertEqual, runTestTT, Test(..))
+import Test.HUnit(assertEqual, runTestTTAndExit, Test(..))
 import qualified Test.HUnit.Base
 
 import Set(insert, contains, delete, listToSet, filterSet, mergeSets, sizeSet)
 
-main :: IO Test.HUnit.Base.Counts
-main = runTestTT tests
+main :: IO ()
+main = runTestTTAndExit tests
 
 tests :: Test
 tests = TestList [TestLabel "test1" test1,
