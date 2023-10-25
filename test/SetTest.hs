@@ -13,6 +13,7 @@ tests = TestList [TestLabel "test1" test1,
 
 test1 :: Test
 test1 = TestCase ( do
+    assertEqual "Test assert" True False
     let tree = listToSet [3 :: Int,1,4,1,5,9,2,6,5,3,5]
     assertEqual "Test assert" (Set.sizeSet tree) 7
     assertEqual "Test assert" (Set.contains (3 :: Int) tree) True
