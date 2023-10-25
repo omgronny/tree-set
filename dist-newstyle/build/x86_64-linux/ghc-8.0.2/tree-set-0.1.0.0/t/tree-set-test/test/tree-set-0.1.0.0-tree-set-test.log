@@ -1,4 +1,0 @@
-Test suite tree-set-test: RUNNING...
-Cases: 3  Tried: 0  Errors: 0  Failures: 0Cases: 3  Tried: 1  Errors: 0  Failures: 0Cases: 3  Tried: 2  Errors: 0  Failures: 0                                          Cases: 3  Tried: 3  Errors: 0  Failures: 0
-Test suite tree-set-test: PASS
-Test suite logged to: /home/omgronny/study/functional/tree-set/dist-newstyle/build/x86_64-linux/ghc-8.0.2/tree-set-0.1.0.0/t/tree-set-test/test/tree-set-0.1.0.0-tree-set-test.log
