@@ -1,4 +1,3 @@
-{-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 module Set(Tree, insert, contains, delete, listToSet, mapSet, filterSet, foldlSet, foldrSet, mergeSets, sizeSet) where
 
 data Tree a = Leaf | Node a (Tree a) (Tree a)
@@ -29,10 +28,12 @@ deleteRoot (Node _ Leaf right) = right
 deleteRoot (Node _ left right) = Node (findMinElement right) (extractMinElement left) right
 
 findMinElement :: Ord a => Tree a -> a
+findMinElement Leaf = error "findMinElement(Leaf)"
 findMinElement (Node y Leaf _) = y
 findMinElement (Node _ left _) = findMinElement left
 
 extractMinElement :: Ord a => Tree a -> Tree a
+extractMinElement Leaf = error "extractMinElement(Leaf)"
 extractMinElement (Node _ Leaf right) = right
 extractMinElement (Node x left right) = Node x (extractMinElement left) right
 
