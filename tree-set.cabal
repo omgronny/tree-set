@@ -47,6 +47,7 @@ test-suite tree-set-test
         -threaded -rtsopts -with-rtsopts=-N
 
     build-depends:
+        QuickCheck,
         HUnit,
         base >=4.7 && <5,
         tree-set
