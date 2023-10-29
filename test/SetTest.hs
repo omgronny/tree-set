@@ -83,13 +83,13 @@ prop_insert_delete list elementToInsert = do
     else
         tree == delete elementToInsert inserted
 
-prop_filter :: [Int] -> Bool
-prop_filter list = do
+prop_filter :: [Int] -> Int -> Bool
+prop_filter list threshold = do
     let tree = listToSet list
-    let filtered = filterSet (> 0) tree
+    let filtered = filterSet (> threshold) tree
 
-    all (> 0) (setToList filtered) &&
-        all (contains filtered) (filter (> 0) list)
+    all (> threshold) (setToList filtered) &&
+        all (contains filtered) (filter (> threshold) list)
 
 prop_merge :: [Int] -> [Int] -> Bool
 prop_merge list1 list2 = do

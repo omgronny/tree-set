@@ -68,7 +68,7 @@ mapSet mapper tree = mapSetRecursive mapper tree Leaf
     mapSetRecursive mapper Leaf mapped = mapped
     mapSetRecursive mapper (Node x left right) mapped =
       let leftResult = mapSetRecursive mapper left (insert (mapper x) mapped)
-        in mapSetRecursive mapper right leftResult
+       in mapSetRecursive mapper right leftResult
 
 filterSet :: (Ord a) => (a -> Bool) -> Tree a -> Tree a
 filterSet predicate tree = filterSetRecursive predicate tree Leaf
@@ -77,7 +77,7 @@ filterSet predicate tree = filterSetRecursive predicate tree Leaf
     filterSetRecursive predicate Leaf filtered = filtered
     filterSetRecursive predicate (Node x left right) filtered =
       let leftResult = filterSetRecursive predicate left (maybeInsert predicate x filtered)
-        in filterSetRecursive predicate right leftResult
+       in filterSetRecursive predicate right leftResult
 
     maybeInsert :: (Ord a) => (a -> Bool) -> a -> Tree a -> Tree a
     maybeInsert predicate x tree = if predicate x then insert x tree else tree
@@ -91,7 +91,7 @@ foldrSet foldFun begin tree = foldrSetRecursive foldFun tree begin
     foldrSetRecursive foldFun Leaf result = result
     foldrSetRecursive foldFun (Node x left right) result =
       let rightResult = foldrSetRecursive foldFun right result
-        in foldrSetRecursive foldFun left (foldFun x rightResult)
+       in foldrSetRecursive foldFun left (foldFun x rightResult)
 
 foldlSet :: (Ord a) => (a1 -> a -> a1) -> a1 -> Tree a -> a1
 foldlSet foldFun begin tree = foldlSetRecursive foldFun tree begin
@@ -100,7 +100,7 @@ foldlSet foldFun begin tree = foldlSetRecursive foldFun tree begin
     foldlSetRecursive foldFun Leaf result = result
     foldlSetRecursive foldFun (Node x left right) result =
       let leftResult = foldlSetRecursive foldFun left result
-        in foldlSetRecursive foldFun right (foldFun leftResult x)
+       in foldlSetRecursive foldFun right (foldFun leftResult x)
 
 --------------------------------------------------------------------------------
 
@@ -109,7 +109,7 @@ mergeSets Leaf rhs = rhs
 mergeSets lhs Leaf = lhs
 mergeSets lhs (Node x left right) =
   let leftResult = mergeSets (insert x lhs) left
-    in mergeSets leftResult right
+   in mergeSets leftResult right
 
 --------------------------------------------------------------------------------
 
