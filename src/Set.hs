@@ -115,4 +115,4 @@ mergeSets lhs (Node x left right) =
 
 sizeSet :: (Ord a) => Tree a -> Int
 sizeSet Leaf = 0
-sizeSet (Node x left right) = sizeSet left + sizeSet right + 1
+sizeSet (Node _ left right) = sizeSet left + sizeSet right + 1
