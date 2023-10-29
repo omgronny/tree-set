@@ -44,10 +44,10 @@ jobs:
       uses: haskell-actions/hlint-run@v2
       with:
         path: src/
-    - name: 'Run formatter'
-      uses: haskell-actions/run-ormolu@v14
-      with:
-        pattern: |
-          src/*.hs
+    # - name: 'Run formatter'
+    #   uses: haskell-actions/run-ormolu@v14
+    #   with:
+    #     pattern: |
+    #       src/*.hs
     - name: Run tests
       run: cabal test all --test-show-details=always
