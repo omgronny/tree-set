@@ -17,6 +17,8 @@ tests = TestList [TestLabel "test insert delete" test1,
                 TestLabel "test fold" test5
                 ]
 
+--------------------------------------------------------------------------------
+
 test1 :: Test
 test1 = TestCase ( do
     let tree = listToSet [3 :: Int,1,4,1,5,9,2,6,5,3,5]
@@ -72,6 +74,8 @@ test5 = TestCase ( do
     assertEqual "Test assert" foldedl 30
     assertEqual "Test assert" foldedr 30
     )
+
+--------------------------------------------------------------------------------
 
 prop_insert_delete :: [Int] -> Int -> Bool
 prop_insert_delete list elementToInsert = do

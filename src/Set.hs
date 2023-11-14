@@ -62,45 +62,40 @@ setToList (Node x left right) = setToList left ++ [x] ++ setToList right
 --------------------------------------------------------------------------------
 
 mapSet :: (Ord a) => (a -> a) -> Tree a -> Tree a
-mapSet mapper tree = mapSetRecursive mapper tree Leaf
+mapSet mapper tree = mapSetRecursive tree Leaf
   where
-    mapSetRecursive :: (Ord a) => (a -> a) -> Tree a -> Tree a -> Tree a
-    mapSetRecursive mapper Leaf mapped = mapped
-    mapSetRecursive mapper (Node x left right) mapped =
-      let leftResult = mapSetRecursive mapper left (insert (mapper x) mapped)
-       in mapSetRecursive mapper right leftResult
+    mapSetRecursive Leaf mapped = mapped
+    mapSetRecursive (Node x left right) mapped =
+      let leftResult = mapSetRecursive left (insert (mapper x) mapped)
+       in mapSetRecursive right leftResult
 
 filterSet :: (Ord a) => (a -> Bool) -> Tree a -> Tree a
-filterSet predicate tree = filterSetRecursive predicate tree Leaf
+filterSet predicate tree = filterSetRecursive tree Leaf
   where
-    filterSetRecursive :: (Ord a) => (a -> Bool) -> Tree a -> Tree a -> Tree a
-    filterSetRecursive predicate Leaf filtered = filtered
-    filterSetRecursive predicate (Node x left right) filtered =
-      let leftResult = filterSetRecursive predicate left (maybeInsert predicate x filtered)
-       in filterSetRecursive predicate right leftResult
+    filterSetRecursive Leaf filtered = filtered
+    filterSetRecursive (Node x left right) filtered =
+      let leftResult = filterSetRecursive left (maybeInsert x filtered)
+       in filterSetRecursive right leftResult
 
-    maybeInsert :: (Ord a) => (a -> Bool) -> a -> Tree a -> Tree a
-    maybeInsert predicate x tree = if predicate x then insert x tree else tree
+    maybeInsert x tree' = if predicate x then insert x tree' else tree'
 
 --------------------------------------------------------------------------------
 
-foldrSet :: (Ord a) => (a -> a1 -> a1) -> a1 -> Tree a -> a1
-foldrSet foldFun begin tree = foldrSetRecursive foldFun tree begin
+foldrSet :: (a -> a1 -> a1) -> a1 -> Tree a -> a1
+foldrSet foldFun begin tree = foldrSetRecursive tree begin
   where
-    foldrSetRecursive :: (Ord a) => (a -> a1 -> a1) -> Tree a -> a1 -> a1
-    foldrSetRecursive foldFun Leaf result = result
-    foldrSetRecursive foldFun (Node x left right) result =
-      let rightResult = foldrSetRecursive foldFun right result
-       in foldrSetRecursive foldFun left (foldFun x rightResult)
+    foldrSetRecursive Leaf result = result
+    foldrSetRecursive (Node x left right) result =
+      let rightResult = foldrSetRecursive right result
+       in foldrSetRecursive left (foldFun x rightResult)
 
-foldlSet :: (Ord a) => (a1 -> a -> a1) -> a1 -> Tree a -> a1
-foldlSet foldFun begin tree = foldlSetRecursive foldFun tree begin
+foldlSet :: (a1 -> a -> a1) -> a1 -> Tree a -> a1
+foldlSet foldFun begin tree = foldlSetRecursive tree begin
   where
-    foldlSetRecursive :: (Ord a) => (a1 -> a -> a1) -> Tree a -> a1 -> a1
-    foldlSetRecursive foldFun Leaf result = result
-    foldlSetRecursive foldFun (Node x left right) result =
-      let leftResult = foldlSetRecursive foldFun left result
-       in foldlSetRecursive foldFun right (foldFun leftResult x)
+    foldlSetRecursive Leaf result = result
+    foldlSetRecursive (Node x left right) result =
+      let leftResult = foldlSetRecursive left result
+       in foldlSetRecursive right (foldFun leftResult x)
 
 --------------------------------------------------------------------------------
 
