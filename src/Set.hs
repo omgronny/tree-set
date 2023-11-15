@@ -6,9 +6,9 @@ data Tree a = Leaf | Node a (Tree a) (Tree a) deriving (Show)
 
 instance (Ord a) => Eq (Tree a) where
   tree1 == tree2 =
-    sizeSet tree1 == sizeSet tree2 &&
-    all (contains tree1) (setToList tree2) &&
-        all (contains tree2) (setToList tree1)
+    sizeSet tree1 == sizeSet tree2
+      && all (contains tree1) (setToList tree2)
+      && all (contains tree2) (setToList tree1)
 
 --------------------------------------------------------------------------------
 
