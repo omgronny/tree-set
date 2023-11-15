@@ -4,9 +4,10 @@ import Set(insert, contains, delete, mapSet, filterSet, mergeSets, sizeSet, list
 
 main :: IO ()
 main = do
-    quickCheck prop_insert_delete
-    quickCheck prop_filter
-    quickCheck prop_merge
+    quickCheckWith stdArgs { maxSuccess = 10000} prop_insert_delete
+    quickCheckWith stdArgs { maxSuccess = 10000} prop_filter
+    quickCheckWith stdArgs { maxSuccess = 10000} prop_merge
+    quickCheckWith stdArgs { maxSuccess = 10000} prop_merge_assoc
     runTestTTAndExit tests
 
 tests :: Test
@@ -104,3 +105,15 @@ prop_merge list1 list2 = do
 
     all (contains merged) (setToList tree1) &&
         all (contains merged) (setToList tree2)
+
+prop_merge_assoc :: [Int] -> [Int] -> [Int] -> Bool
+prop_merge_assoc list1 list2 list3 = do
+    let tree1 = listToSet list1
+    let tree2 = listToSet list2
+    let tree3 = listToSet list3
+
+    let merged1 = mergeSets (mergeSets tree1 tree2) tree3
+    let merged2 = mergeSets tree1 (mergeSets tree2 tree3)
+
+    all (contains merged1) (setToList merged2) &&
+        all (contains merged2) (setToList merged1)
