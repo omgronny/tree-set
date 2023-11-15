@@ -1,6 +1,14 @@
 module Set (Tree, insert, contains, delete, listToSet, mapSet, filterSet, foldlSet, foldrSet, mergeSets, sizeSet, setToList) where
 
-data Tree a = Leaf | Node a (Tree a) (Tree a) deriving (Show, Eq)
+data Tree a = Leaf | Node a (Tree a) (Tree a) deriving (Show)
+
+--------------------------------------------------------------------------------
+
+instance (Ord a) => Eq (Tree a) where
+  tree1 == tree2 =
+    sizeSet tree1 == sizeSet tree2 &&
+    all (contains tree1) (setToList tree2) &&
+        all (contains tree2) (setToList tree1)
 
 --------------------------------------------------------------------------------
 
@@ -48,14 +56,10 @@ contains (Node y left right) x
 
 --------------------------------------------------------------------------------
 
-mapSetToList :: (Ord a) => (a -> a) -> Tree a -> [a]
-mapSetToList _ Leaf = []
-mapSetToList fun (Node x left right) = mapSetToList fun left ++ [fun x] ++ mapSetToList fun right
-
 listToSet :: (Ord a) => [a] -> Tree a
 listToSet = foldr insert Leaf
 
-setToList :: (Ord a) => Tree a -> [a]
+setToList :: Tree a -> [a]
 setToList Leaf = []
 setToList (Node x left right) = setToList left ++ [x] ++ setToList right
 

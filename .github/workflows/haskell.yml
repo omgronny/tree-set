@@ -48,6 +48,6 @@ jobs:
       uses: haskell-actions/run-ormolu@v14
       with:
         pattern: |
-          src/*.hs
+          */*.hs
     - name: Run tests
       run: cabal test all --test-show-details=always
